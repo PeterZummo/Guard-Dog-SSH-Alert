@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Extract information about the SSH connection
+IP=$(echo $SSH_CONNECTION | awk '{print $1}')
+USER=$(whoami)
+HOSTNAME=$(hostname)
+DATE=$(date)
+
+# Define colors and formatting for the SSH user
+RED='\033[0;31m'        # Red color
+BOLD='\033[1m'          # Bold text
+RESET='\033[0m'         # Reset to default color
+
+
+# Define the ASCII art
+ASCII_ART=$(cat << "EOF"
+                __
+               /\/'-,
+       ,--'''''   /"
+ ____,'.  )       \___
+'"""""------'"""`-----'
+
+EOF
+)
+
+# Create the message with and without formatting
+MESSAGE_COLOR="${RED}${BOLD}SSH login detected on $HOSTNAME. User: $USER, IP: $IP, Dat>MESSAGE_PLAIN="SSH login detected on $HOSTNAME. User: $USER, IP: $IP, Date: $DATE\n${A>
+
+# Display the colored message to the SSH user (current session)
+echo -e "$MESSAGE_COLOR"
+
+# Broadcast the plain-text message (including ASCII art) to all logged-in users
+echo -e "$MESSAGE_PLAIN" | wall
+
+# Allow the user to continue their SSH session
+exec "$SHELL"
