@@ -23,13 +23,13 @@ ASCII_ART=$(cat << "EOF"
 EOF
 )
 
-# Create the message with and without formatting
+# Creates the message with and without formatting
 MESSAGE_COLOR="${RED}${BOLD}SSH login detected on $HOSTNAME. User: $USER, IP: $IP, Dat>MESSAGE_PLAIN="SSH login detected on $HOSTNAME. User: $USER, IP: $IP, Date: $DATE\n${A>
 
-# Display the colored message to the SSH user (current session)
+# Displays the colored message to the SSH user (current session)
 echo -e "$MESSAGE_COLOR"
 
-# Broadcast the plain-text message (including ASCII art) to all logged-in users
+# Broadcasts the plain text message to all logged-in users
 echo -e "$MESSAGE_PLAIN" | wall
 
 # Allow the user to continue their SSH session
